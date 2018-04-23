@@ -1,0 +1,45 @@
+{
+  "name": "react-fundraising-countdown",
+  "version": "0.0.1",
+  "description": "ICO Fundraising component includes: countdown, progressbar, and milestones",
+  "main": "lib/index.js",
+  "scripts": {
+    "lib": "babel src/lib -d lib",
+    "lib:watch": "babel src/lib -w -d lib",
+    "docs": "webpack-dev-server",
+    "docs:prod": "webpack -p"
+  },
+  "keywords": ["ICO", "countdown", "fundraising","react", "progressbar"],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^15.3.0 || ^16.2.0",
+    "react-dom": "^15.3.0 || ^16.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.37",
+    "@babel/core": "^7.0.0-beta.37",
+    "@babel/preset-env": "^7.0.0-beta.37",
+    "@babel/preset-react": "^7.0.0-beta.37",
+    "babel-loader": "^8.0.0-beta.0",
+    "css-loader": "^0.28.8",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.8.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0"
+  },
+  "author": "Ali Makeen <ali.makeen@icloud.com>",
+  "homepage": "https://github.com/paranoia5/react-fundraising-countdown",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:paranoia5/react-fundraising-countdown.git"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "prop-types": "^15.6.1",
+    "reactstrap": "^5.0.0-beta.3"
+  }
+}
