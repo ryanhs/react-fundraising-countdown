@@ -11,10 +11,10 @@ const BOTTOM_LINE_DIV = 'bottom_line_div';
 
 class AnimatedCard extends React.Component {
 	render() {
-		const { position, digit, animation } = this.props;
+		const { position, digit, animation, style, textStyle } = this.props;
 		return(
-			<div className={`flipCard ${position} ${animation}`}>
-				<span>{digit}</span>
+			<div className={`flipCard ${position} ${animation}`} style={style}>
+				<span style={textStyle}>{digit}</span>
 			</div>
 		);
 	}
@@ -22,10 +22,10 @@ class AnimatedCard extends React.Component {
 
 class StaticCard extends React.Component {
 	render() {
-		const { position, digit } = this.props;
+		const { position, digit, style, textStyle } = this.props;
 		return(
-			<div className={position}>
-				<span>{digit}</span>
+			<div className={position} style={style}>
+				<span style={textStyle}>{digit}</span>
 			</div>
 		);
 	}
@@ -33,7 +33,9 @@ class StaticCard extends React.Component {
 
 class FlipUnitContainer extends React.Component {
 	render() {
-		const { digit, shuffle, unit, alias } = this.props;
+		const { digit, shuffle, unit, alias,
+			icoClockStyle, icoClockFlipStyle, icoClockFlipTextStyle,
+			unitLabelContainerStyle, unitLabelTextStyle} = this.props;
 
 		let now = digit;
 		let before = digit===59? 0 : digit + 1;
@@ -57,28 +59,36 @@ class FlipUnitContainer extends React.Component {
 
 		return(
       <div>
-  			<div className={'flipUnitContainer'}>
+  			<div className={'flipUnitContainer'} style={icoClockStyle}>
   				<StaticCard
   					position={'upperCard'}
   					digit={now}
+						style={icoClockFlipStyle}
+						textStyle={icoClockFlipTextStyle}
   					/>
   				<StaticCard
   					position={'lowerCard'}
   					digit={before}
+						style={icoClockFlipStyle}
+						textStyle={icoClockFlipTextStyle}
   					/>
   				<AnimatedCard
   					position={'first'}
   					digit={digit1}
   					animation={animation1}
+						style={icoClockFlipStyle}
+						textStyle={icoClockFlipTextStyle}
   					/>
   				<AnimatedCard
   					position={'second'}
   					digit={digit2}
   					animation={animation2}
+						style={icoClockFlipStyle}
+						textStyle={icoClockFlipTextStyle}
   					/>
   			</div>
-        <div className={'UnitItemContainer'}>
-          <span>{alias}</span>
+        <div className={'UnitItemContainer'} style={unitLabelContainerStyle}>
+          <span style={unitLabelTextStyle}>{alias}</span>
         </div>
       </div>
 		);
@@ -112,10 +122,10 @@ class ShapeMilestone extends React.Component {
         default:
       }
       if (line) {
-        return <div key={i} className={_classname} style={{width:`${width}%`, borderColor: `${milestoneLineColor}`}}></div>
+        return <div key={i} className={_classname} style={{width:`${width}%`, borderColor: milestoneLineColor}}></div>
       }
       else {
-        return <div key={i} className={_classname} style={{width:`${width}%`}}><span style={{color:this.props.milestoneLineColor}}>{_milestoneText}</span></div>
+        return <div key={i} className={_classname} style={{width:`${width}%`}}><span style={{color:milestoneLineColor}}>{_milestoneText}</span></div>
       }
     })
 		// this.props.onTimerComplete();
@@ -123,23 +133,34 @@ class ShapeMilestone extends React.Component {
   }
 }
 ShapeMilestone.propTypes = {
-icoProgress: PropTypes.bool,
+	line: PropTypes.bool,
 };
 
 ShapeMilestone.defaultProps = {
-  line: false
-  // onTimerComplete: ()=>{this.onTimerComplete}
+  line: false,
 };
 
 export class FundingProgress extends React.Component {
 	render(){
 		const {currentFund, softcap, hardcap, currency, milestones, milestoneLineColor, icoProgress} = this.props;
 
-		return icoProgress? <div className={'ProgressContainer'}><div className={'flexLines'}><ShapeMilestone divType={TOP_MIL_DIV}  {...this.props} /></div><div className={'flexLines'}><ShapeMilestone  {...this.props} divType={TOP_LINE_DIV} line /></div><Progress multi>
-				<Progress  striped active animated bar max={100} color="success" value={(currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>{`${currency}${currentFund}`}</span></Progress>
-				<Progress bar max={100} color="warning" value={(softcap-currentFund)>0?((softcap-currentFund)/hardcap)*100: 0}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>softcap: {`${currency}${softcap}`}</span></Progress>
-				<Progress bar max={100} color="info" value={(softcap-currentFund)>0? 100 - (softcap/hardcap)*100 : 100 - (currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>hardcap: {`${currency}${hardcap}`}</span></Progress>
-			</Progress><div className={'flexLines'}><ShapeMilestone line divType={BOTTOM_LINE_DIV} {...this.props} /></div><div className={'flexLines'}><ShapeMilestone divType={BOTTOM_MIL_DIV}  {...this.props} /></div></div>: null;
+		return icoProgress?
+			<div className={'ProgressContainer'}>
+				<div className={'flexLines'}>
+					<ShapeMilestone divType={TOP_MIL_DIV}  {...this.props} /></div>
+					<div className={'flexLines'}><ShapeMilestone  {...this.props} divType={TOP_LINE_DIV} line /></div>
+				<Progress multi>
+					<Progress  striped active animated bar max={100} color="success" value={(currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>{`${currency}${currentFund}`}</span></Progress>
+					<Progress bar max={100} color="warning" value={(softcap-currentFund)>0?((softcap-currentFund)/hardcap)*100: 0}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>softcap: {`${currency}${softcap}`}</span></Progress>
+					<Progress bar max={100} color="info" value={(softcap-currentFund)>0? 100 - (softcap/hardcap)*100 : 100 - (currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>hardcap: {`${currency}${hardcap}`}</span></Progress>
+				</Progress>
+				<div className={'flexLines'}>
+					<ShapeMilestone line divType={BOTTOM_LINE_DIV} {...this.props} />
+				</div>
+				<div className={'flexLines'}>
+					<ShapeMilestone divType={BOTTOM_MIL_DIV}  {...this.props} />
+				</div>
+			</div> : null;
 	}
 }
 
@@ -147,7 +168,7 @@ class FundClockProgress extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-      days: 0,
+			days: 0,
 			daysShuffle: true,
 			hours: 0,
 			hoursShuffle: true,
@@ -155,7 +176,7 @@ class FundClockProgress extends React.Component {
 			minutesShuffle: true,
 			seconds: 0,
 			secondsShuffle: true,
-      isExpired: false,
+			isExpired: false,
 		};
 	}
 	componentDidMount() {
@@ -174,26 +195,19 @@ class FundClockProgress extends React.Component {
     // get campaign end Date
     const _campaignEndDate = new Date(campaignEndDate);
 		// set time units
-
     if(_campaignEndDate>now){
 			var distance = Math.abs(_campaignEndDate - now) / 1000;
-
 			// calculate (and subtract) whole days
 			var days = Math.floor(distance / 86400);
 			distance -= days * 86400;
-
 			// calculate (and subtract) whole hours
 			var hours = Math.floor(distance / 3600) % 24;
 			distance -= hours * 3600;
-
 			// calculate (and subtract) whole minutes
 			var minutes = Math.floor(distance / 60) % 60;
 			distance -= minutes * 60;
-
 			// what's left is seconds
 			var seconds = parseInt(distance)
-			//console.log(seconds)
-
 			// on days chanage, update days and shuffle state
 			if( days !== this.state.days) {
 				const daysShuffle = !this.state.daysShuffle;
@@ -227,10 +241,10 @@ class FundClockProgress extends React.Component {
 			});
 		}
 	} else {
+		clearInterval(this.icoCountDown);
     this.setState({
       isExpired: true
     });
-		clearInterval(this.icoCountDown);
   }
 }
 
@@ -238,47 +252,57 @@ render() {
 		const { days, hours, minutes, seconds, daysShuffle, hoursShuffle, minutesShuffle, secondsShuffle, isExpired } = this.state;
     const { softcap, hardcap, Milestones, icoProgress, milestones } = this.props;
 		return(
-      isExpired? <FundingProgress {...this.props} />
+      isExpired?
+			<FundingProgress {...this.props} />
       :
-			<div className={'flipClock'}>
+			<div className={'flipClock'} >
         <FlipUnitContainer
           unit={'days'}
           alias={'Days'}
           digit={days}
           shuffle={daysShuffle}
+					{...this.props}
           />
         <FlipUnitContainer
 					unit={'hours'}
           alias={'Hours'}
 					digit={hours}
 					shuffle={hoursShuffle}
+					{...this.props}
 					/>
 				<FlipUnitContainer
 					unit={'minutes'}
           alias={'Mins'}
 					digit={minutes}
 					shuffle={minutesShuffle}
+					{...this.props}
 					/>
 				<FlipUnitContainer
 					unit={'seconds'}
           alias={'Secs'}
 					digit={seconds}
 					shuffle={secondsShuffle}
+					{...this.props}
 					/>
 			</div>
 		);
 	}
 }
 FundClockProgress.propTypes = {
-campaignEndDate: PropTypes.string,
-currency: PropTypes.string,
-currentFund: PropTypes.number,
-softcap: PropTypes.number,
-hardcap: PropTypes.number,
-milestones: PropTypes.array,
-icoProgress: PropTypes.bool,
-onTimerComplete: PropTypes.func,
-milestoneLineColor: PropTypes.string,
+	campaignEndDate: PropTypes.string,
+	currency: PropTypes.string,
+	currentFund: PropTypes.number,
+	softcap: PropTypes.number,
+	hardcap: PropTypes.number,
+	milestones: PropTypes.array,
+	icoProgress: PropTypes.bool,
+	onTimerComplete: PropTypes.func,
+	milestoneLineColor: PropTypes.string,
+	icoClockStyle: PropTypes.object,
+	icoClockFlipStyle: PropTypes.object,
+	unitLabelContainerStyle: PropTypes.object,
+	unitLabelTextStyle: PropTypes.object,
+	icoClockFlipTextStyle: PropTypes.object
 };
 
 FundClockProgress.defaultProps = {
@@ -288,14 +312,19 @@ FundClockProgress.defaultProps = {
   								new Date().getDate(),
   								new Date().getHours(),
   								new Date().getMinutes(),
-  								new Date().getSeconds()+10).toString(),
+  								new Date().getSeconds()+20).toString(),
   icoProgress: false,
   currentFund: 0,
   softcap: 0,
   hardcap: 0,
   milestones: [],
   currency: '$',
-  milestoneLineColor: 'grey'
+  milestoneLineColor: 'grey',
+	icoClockStyle: {},
+	icoClockFlipStyle: {},
+	unitLabelContainerStyle: {},
+	unitLabelTextStyle:{},
+	icoClockFlipTextStyle:{}
 };
 
 

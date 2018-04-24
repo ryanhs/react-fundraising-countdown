@@ -55,7 +55,12 @@ class Demo extends React.Component {
           softcap={this.state.softcap}
           hardcap={this.state.hardcap}
           milestones={milestonesData}
-          onTimerComplete={()=>{this.onTimerComplete()}}
+          milestoneLineColor={'#000'}
+          icoClockStyle={{backgroundColor:'#ddd'}}
+          icoClockFlipStyle={{backgroundColor:'#ddd'}}
+          icoClockFlipTextStyle={{color:'#e91e63'}}
+          unitLabelContainerStyle={{backgroundColor:'#e91e63', height: '25px'}}
+          unitLabelTextStyle={{color:'#000', fontSize: '1.1em'}}
         />
       </div>
     );

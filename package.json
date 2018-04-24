@@ -1,6 +1,6 @@
 {
   "name": "react-fundraising-countdown",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "ICO Fundraising component includes: countdown, progressbar, and milestones",
   "main": "lib/index.js",
   "scripts": {

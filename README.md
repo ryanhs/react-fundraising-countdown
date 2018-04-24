@@ -10,6 +10,8 @@ You can install via npm or yarn:
 * `npm install react-fundraising-countdown -S`
 * `yarn add  react-fundraising-countdown`
 
+[Live Demo](https://codesandbox.io/s/vn0j13v87l)
+
 ## Motivation
 
 The idea started when building a small website for an ICO campaign. So I thought of separating this fundraising countdown, fund progress, and milestones of a series of steps within the campaign from the main package so it can be reusable and serves as a starting point for further enhancement by developers to make it great and more useful.
@@ -62,4 +64,9 @@ const milestonesData = [
 | hardcap      | number |   the maximum cap needed  |
 | milestones   | array of object |    [] | takes an object of two attributes (text, cap) see the example above |
 | currency     | string | $  | currency used for fundraising  |
-| milestoneLineColor     | string |   grey  | color to represent the line and milestone text
+| milestoneLineColor     | string |   grey  | color to represent the line and milestone text |
+| icoClockStyle     | object |   {backgroundColor:'#000', width:'80px',height:'80px' | Clock Unit container Style |
+| icoClockFlipStyle | object | {backgroundColor:'#000', width:'80px',height:'80px'}  | the folding Clock container style |
+| icoClockFlipTextStyle | string (color) |  {color:'#fff'}  | the clock digit text style of each unit |
+| unitLabelContainerStyle | string (color) | {backgroundColor:'#000', width:'80px',height:'20px'} | the Unit label Container Style |
+| unitLabelTextStyle | string (color) | {color:'#fff'} | the Unit label Text Style |

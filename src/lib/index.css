@@ -97,7 +97,7 @@
 
 .upperCard {
   align-items: flex-end;
-  border-bottom: 0.25px solid #333333;
+  border-bottom: 0.25px solid #33333340;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -108,7 +108,7 @@
 
 .lowerCard {
   align-items: flex-start;
-  border-top: 0.25px solid #333333;
+  border-top: 0.25px solid #33333340;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -144,8 +144,8 @@
   background-color: black;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  border: 1px solid #333333;
-  border-top: 0.5px solid #333333;
+  border: 1px solid #33333340;
+  border-top: 0.5px solid #33333340;
 }
 .flipCard.unfold span {
   /* width:100%; */
@@ -162,8 +162,8 @@
   background-color: black;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  border: 0.5px solid #333333;
-  border-bottom: 0.5px solid #333333;
+  border: 0.5px solid #444444;
+  border-bottom: 0.5px solid #444444;
 }
 .flipCard.fold span {
   /* width:100%; */
