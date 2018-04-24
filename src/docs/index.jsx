@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import FlipClock from "../lib";
+import FundClockProgress from "../lib";
 import "./styles.css";
 const milestonesData= [{
   text: 'ICO Start',
@@ -22,17 +22,25 @@ class Demo extends React.Component {
   constructor(props){
     super(props)
     this.state={
-      currentFund:1000000,
+      currentFund:100000,
+      softcap: 9000000,
+      hardcap: 24000000,
     }
   }
-  componentDidMount() {
-		this.icoFundRaising = setInterval(
-			() => this.updateFundRaising(),
-			1000
-		);
+  componentWillMount() {
+      this.icoFundRaising = setInterval(
+  			() => this.updateFundRaising(),
+  		 500
+  		);
 	}
   updateFundRaising() {
-    this.setState({currentFund: this.state.currentFund + 100000})
+    const {hardcap, currentFund} =this.state;
+    if (currentFund <= hardcap) {
+      this.setState({currentFund: currentFund + 100000})
+    }
+    else {
+        clearInterval(this.icoFundRaising);
+    }
   }
 	componentWillUnmount() {
 		clearInterval(this.icoFundRaising);
@@ -41,7 +49,14 @@ class Demo extends React.Component {
     return (
       <div>
         <h1>ICO Countdown Component</h1>
-        <FlipClock icoProgress campaignEndDate='2018-9-31' currentFund={this.state.currentFund} softcap={9000000} hardcap={24000000} milestones={milestonesData}/>
+        <FundClockProgress
+          icoProgress
+          currentFund={this.state.currentFund}
+          softcap={this.state.softcap}
+          hardcap={this.state.hardcap}
+          milestones={milestonesData}
+          onTimerComplete={()=>{this.onTimerComplete()}}
+        />
       </div>
     );
   }

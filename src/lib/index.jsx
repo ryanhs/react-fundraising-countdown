@@ -93,10 +93,11 @@ class ShapeMilestone extends React.Component {
     let divs= milestones.map((item, i) => {
       let width= i==0? (item.cap/hardcap)*100 : (Math.abs(item.cap-previousCap)/hardcap)*100
       previousCap=item.cap;
-      let _classname='';
+      let _classname, _milestoneText='';
       switch (divType) {
         case TOP_MIL_DIV:
           _classname= i%2===0? 'milestone':'empty-div';
+					_milestoneText= i%2===0? item.text:'';
           break;
         case TOP_LINE_DIV:
           _classname= i%2===0? 'vl':'empty-div';
@@ -105,7 +106,8 @@ class ShapeMilestone extends React.Component {
           _classname= i%2!=0? 'vl':'empty-div';
           break;
         case BOTTOM_MIL_DIV:
-          _classname= i%2===0? 'milestone':'empty-div';
+					_milestoneText= i%2!=0? item.text:'';
+          _classname= i%2!=0? 'milestone':'empty-div';
           break;
         default:
       }
@@ -113,9 +115,10 @@ class ShapeMilestone extends React.Component {
         return <div key={i} className={_classname} style={{width:`${width}%`, borderColor: `${milestoneLineColor}`}}></div>
       }
       else {
-        return <div key={i} className={_classname} style={{width:`${width}%`}}><span>{i%2===0? item.text:''}</span></div>
+        return <div key={i} className={_classname} style={{width:`${width}%`}}><span style={{color:this.props.milestoneLineColor}}>{_milestoneText}</span></div>
       }
     })
+		// this.props.onTimerComplete();
     return divs;
   }
 }
@@ -128,7 +131,19 @@ ShapeMilestone.defaultProps = {
   // onTimerComplete: ()=>{this.onTimerComplete}
 };
 
-class FlipClock extends React.Component {
+export class FundingProgress extends React.Component {
+	render(){
+		const {currentFund, softcap, hardcap, currency, milestones, milestoneLineColor, icoProgress} = this.props;
+
+		return icoProgress? <div className={'ProgressContainer'}><div className={'flexLines'}><ShapeMilestone divType={TOP_MIL_DIV}  {...this.props} /></div><div className={'flexLines'}><ShapeMilestone  {...this.props} divType={TOP_LINE_DIV} line /></div><Progress multi>
+				<Progress  striped active animated bar max={100} color="success" value={(currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>{`${currency}${currentFund}`}</span></Progress>
+				<Progress bar max={100} color="warning" value={(softcap-currentFund)>0?((softcap-currentFund)/hardcap)*100: 0}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>softcap: {`${currency}${softcap}`}</span></Progress>
+				<Progress bar max={100} color="info" value={(softcap-currentFund)>0? 100 - (softcap/hardcap)*100 : 100 - (currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>hardcap: {`${currency}${hardcap}`}</span></Progress>
+			</Progress><div className={'flexLines'}><ShapeMilestone line divType={BOTTOM_LINE_DIV} {...this.props} /></div><div className={'flexLines'}><ShapeMilestone divType={BOTTOM_MIL_DIV}  {...this.props} /></div></div>: null;
+	}
+}
+
+class FundClockProgress extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -154,13 +169,14 @@ class FlipClock extends React.Component {
 	}
 	updateTime() {
 		// get new date
+		const {onTimerComplete, campaignEndDate} = this.props;
 		const now = new Date;
     // get campaign end Date
-    const campaignEndDate = new Date(this.props.campaignEndDate);
+    const _campaignEndDate = new Date(campaignEndDate);
 		// set time units
 
-    if(campaignEndDate>now){
-			var distance = Math.abs(campaignEndDate - now) / 1000;
+    if(_campaignEndDate>now){
+			var distance = Math.abs(_campaignEndDate - now) / 1000;
 
 			// calculate (and subtract) whole days
 			var days = Math.floor(distance / 86400);
@@ -214,24 +230,15 @@ class FlipClock extends React.Component {
     this.setState({
       isExpired: true
     });
+		clearInterval(this.icoCountDown);
   }
 }
 
-  onTimerComplete(){
-    const {currentFund, softcap, hardcap, currency, milestones, milestoneLineColor, icoProgress} = this.props;
-    
-    return icoProgress? <div className={'ProgressContainer'}><div className={'flexLines'}><ShapeMilestone divType={TOP_MIL_DIV}  {...this.props} /></div><div className={'flexLines'}><ShapeMilestone  {...this.props} divType={TOP_LINE_DIV} line /></div><Progress multi>
-        <Progress  striped active animated bar max={100} color="success" value={(currentFund/hardcap)*100}><span>{`${currency}${currentFund}`}</span></Progress>
-        <Progress bar max={100} color="warning" value={(softcap-currentFund)>0?((softcap-currentFund)/hardcap)*100: 0}><span>softcap: {`${currency}${softcap}`}</span></Progress>
-        <Progress bar max={100} color="info" value={(softcap-currentFund)>0? 100 - (softcap/hardcap)*100 : 100 - (currentFund/hardcap)*100}><span>hardcap: {`${currency}${hardcap}`}</span></Progress>
-      </Progress><div className={'flexLines'}><ShapeMilestone line divType={BOTTOM_LINE_DIV} {...this.props} /></div><div className={'flexLines'}><ShapeMilestone divType={BOTTOM_MIL_DIV}  {...this.props} /></div></div>: null;
-  }
-
-	render() {
+render() {
 		const { days, hours, minutes, seconds, daysShuffle, hoursShuffle, minutesShuffle, secondsShuffle, isExpired } = this.state;
     const { softcap, hardcap, Milestones, icoProgress, milestones } = this.props;
 		return(
-      isExpired? this.onTimerComplete()
+      isExpired? <FundingProgress {...this.props} />
       :
 			<div className={'flipClock'}>
         <FlipUnitContainer
@@ -262,7 +269,7 @@ class FlipClock extends React.Component {
 		);
 	}
 }
-FlipClock.propTypes = {
+FundClockProgress.propTypes = {
 campaignEndDate: PropTypes.string,
 currency: PropTypes.string,
 currentFund: PropTypes.number,
@@ -274,7 +281,7 @@ onTimerComplete: PropTypes.func,
 milestoneLineColor: PropTypes.string,
 };
 
-FlipClock.defaultProps = {
+FundClockProgress.defaultProps = {
   campaignEndDate: new Date(
   								new Date().getFullYear(),
   								new Date().getMonth(),
@@ -289,8 +296,7 @@ FlipClock.defaultProps = {
   milestones: [],
   currency: '$',
   milestoneLineColor: 'grey'
-  // onTimerComplete: ()=>{this.onTimerComplete}
 };
 
 
-export default FlipClock;
+export default FundClockProgress;
