@@ -52,7 +52,6 @@ class FlipUnitContainer extends React.Component {
 		// shuffle digits
 		const digit1 = shuffle ? before : now;
 		const digit2 = !shuffle ? before : now;
-
 		// shuffle animations
 		const animation1 = shuffle ? 'fold' : 'unfold';
 		const animation2 = !shuffle ? 'fold' : 'unfold';

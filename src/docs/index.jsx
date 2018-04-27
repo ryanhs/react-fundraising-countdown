@@ -59,8 +59,8 @@ class Demo extends React.Component {
           icoClockStyle={{backgroundColor:'#ddd'}}
           icoClockFlipStyle={{backgroundColor:'#ddd'}}
           icoClockFlipTextStyle={{color:'#e91e63'}}
-          unitLabelContainerStyle={{backgroundColor:'#e91e63', height: '25px'}}
-          unitLabelTextStyle={{color:'#000', fontSize: '1.1em'}}
+          // unitLabelContainerStyle={{backgroundColor:'#e91e63', height: '25px'}}
+          // unitLabelTextStyle={{color:'#000', fontSize: '1.1em'}}
         />
       </div>
     );

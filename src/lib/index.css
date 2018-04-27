@@ -63,19 +63,22 @@
   box-shadow: 0px 10px 10px -10px grey;
 }
 .UnitItemContainer {
-  margin-top: 5px;
+  /* margin-top: 5px; */
+  display: flex;
+  margin: 5px auto;
   height: 20px;
   width: 80px;
   background-color: black;
-  align-items: center;
+  align-items: flex-start;
   text-align: center;
   border-radius: 3px;
   justify-content: center;
 }
 .UnitItemContainer span {
+  padding:0;
+  margin: 0 auto;
   color: #fff;
-  margin: auto;
-  font-size: 1em;
+  font-size: 1rem;
 }
 .upperCard, .lowerCard {
   display: flex;
@@ -144,8 +147,8 @@
   background-color: black;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  border: 1px solid #33333340;
-  border-top: 0.5px solid #33333340;
+  border: 1px solid #33333300;
+  border-top: 0.5px solid #33333300;
 }
 .flipCard.unfold span {
   /* width:100%; */
@@ -162,8 +165,8 @@
   background-color: black;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  border: 0.5px solid #444444;
-  border-bottom: 0.5px solid #444444;
+  border: 0.5px solid #33333345;
+  border-bottom: 0.5px solid #33333345;
 }
 .flipCard.fold span {
   /* width:100%; */
@@ -225,4 +228,84 @@
     -webkit-transform: rotateX(0deg);
             transform: rotateX(0deg);
   }
+}
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .flipClock {
+      width: 200px;
+    }
+    .flipUnitContainer {
+      width: 45.7px;
+      height: 45.7px;
+      border-radius: 10px;
+    }
+    .UnitItemContainer {
+      /* margin-top: 5px; */
+      height: 15px;
+      width: 45.7px;
+      border-radius: 3px;
+    }
+    .UnitItemContainer span {
+      font-size: 0.7rem;
+    }
+    .flipCard {
+      width: 45.7px;
+      height: 22.82px;
+    }
+    .flipCard span {
+      font-size: 1.5em;
+    }
+    .upperCard span, .lowerCard span {
+      font-size: 1.5em;
+    }
+}
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+/* Portrait and Landscape */
+/* @media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+
+} */
+
+/* ----------- iPhone X ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+    .flipClock {
+      width: 230px;
+    }
+    .flipUnitContainer {
+      width: 52.57px;
+      height: 52.57px;
+      border-radius: 10px;
+    }
+    .UnitItemContainer {
+      /* margin-top: 5px; */
+      height: 15px;
+      width: 52.57px;
+      border-radius: 3px;
+    }
+    .UnitItemContainer span {
+      font-size: 0.7rem;
+    }
+    .flipCard {
+      width: 52.57px;
+      height: 26.2857px;
+    }
+    .flipCard span {
+      font-size: 1.5em;
+    }
+    .upperCard span, .lowerCard span {
+      font-size: 1.5em;
+    }
 }

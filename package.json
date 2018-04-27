@@ -9,7 +9,13 @@
     "docs": "webpack-dev-server",
     "docs:prod": "webpack -p"
   },
-  "keywords": ["ICO", "countdown", "fundraising","react", "progressbar"],
+  "keywords": [
+    "ICO",
+    "countdown",
+    "fundraising",
+    "react",
+    "progressbar"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "react": "^15.3.0 || ^16.2.0",
