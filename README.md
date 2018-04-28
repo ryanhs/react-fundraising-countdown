@@ -65,8 +65,8 @@ const milestonesData = [
 | milestones   | array of object |    [] | takes an object of two attributes (text, cap) see the example above |
 | currency     | string | $  | currency used for fundraising  |
 | milestoneLineColor     | string |   grey  | color to represent the line and milestone text |
-| icoClockStyle     | object |   {backgroundColor:'#000', width:'80px',height:'80px' | Clock Unit container Style |
-| icoClockFlipStyle | object | {backgroundColor:'#000', width:'80px',height:'80px'}  | the folding Clock container style |
+| icoClockStyle     | object |   {backgroundColor:'#000' | Clock Unit container Style |
+| icoClockFlipStyle | object | {backgroundColor:'#000'}  | the folding Clock container style |
 | icoClockFlipTextStyle | string (color) |  {color:'#fff'}  | the clock digit text style of each unit |
-| unitLabelContainerStyle | string (color) | {backgroundColor:'#000', width:'80px',height:'20px'} | the Unit label Container Style |
+| unitLabelContainerStyle | string (color) | {backgroundColor:'#000'} | the Unit label Container Style |
 | unitLabelTextStyle | string (color) | {color:'#fff'} | the Unit label Text Style |
