@@ -28,14 +28,14 @@
     "@babel/preset-react": "^7.0.0-beta.37",
     "babel-loader": "^8.0.0-beta.0",
     "css-loader": "^0.28.8",
-    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.8.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.19.1",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.0"
+    "webpack": "^4.6.0",
+    "webpack-dev-server": "^3.1.3"
   },
   "author": "Ali Makeen <ali.makeen@icloud.com>",
   "homepage": "https://github.com/paranoia5/react-fundraising-countdown",
