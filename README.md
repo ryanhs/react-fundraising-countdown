@@ -1,8 +1,11 @@
 # React component (react-fundraising-countdown)
 
 This is a simple package that can be used for two purposes:
-1- Used for Countdown only (FlipCard countdown) day: hours: minutes: seconds
-2- fundraising campaign countdown, milestones, and progress bar to display the fund achieved progress compare to the minimum and maximum Fund target.
+
+* `1- Used for Countdown only (FlipCard countdown) day: hours: minutes: seconds`
+* `2- fundraising campaign countdown, milestones, and progress bar to display the fund achieved progress compare to the minimum and maximum Fund target.`
+
+[Click here to check it out](https://codesandbox.io/s/qq4yjwppk6)
 
 inspired by [React Flip Clock](https://codepen.io/Libor_G/pen/JyJzjb) , A Pen by Libor Gabrhel
 
@@ -13,7 +16,7 @@ You can install via npm or yarn:
 * `npm install react-fundraising-countdown -S`
 * `yarn add react-fundraising-countdown`
 
-[Live Demo](https://codesandbox.io/s/vn0j13v87l)
+[Live Demo](https://codesandbox.io/s/qq4yjwppk6)
 
 ## Motivation
 
@@ -53,7 +56,7 @@ const milestonesData= [{
   />
 ```
 
-[Live Demo](https://codesandbox.io/s/vn0j13v87l)
+[Live Demo](https://codesandbox.io/s/qq4yjwppk6)
 
 ## Props
 
