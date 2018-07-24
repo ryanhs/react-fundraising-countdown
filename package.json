@@ -1,6 +1,6 @@
 {
   "name": "react-fundraising-countdown",
-  "version": "0.0.11",
+  "version": "0.0.14",
   "description": "ICO Fundraising component includes: countdown, progressbar, and milestones",
   "main": "lib/index.js",
   "scripts": {
@@ -35,6 +35,7 @@
     "sass-loader": "^7.0.1",
     "style-loader": "^0.19.1",
     "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^3.1.3"
   },
   "author": "Ali Makeen <ali.makeen@icloud.com>",

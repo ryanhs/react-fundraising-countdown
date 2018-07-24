@@ -141,18 +141,14 @@ ShapeMilestone.defaultProps = {
 
 export class FundingProgress extends React.Component {
 	render(){
-		const {currentFund, softcap, hardcap, currency, milestones, milestoneLineColor, icoProgress} = this.props;
+		const {currentFund, softcap, hardcap, currency, milestones, progressColor, milestoneLineColor, icoProgress} = this.props;
 
 		return icoProgress?
 			<div className={'ProgressContainer'}>
 				<div className={'flexLines'}>
 					<ShapeMilestone divType={TOP_MIL_DIV}  {...this.props} /></div>
 					<div className={'flexLines'}><ShapeMilestone  {...this.props} divType={TOP_LINE_DIV} line /></div>
-				<Progress multi>
-					<Progress  striped active animated bar max={100} color="success" value={(currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>{`${currency}${currentFund}`}</span></Progress>
-					<Progress bar max={100} color="warning" value={(softcap-currentFund)>0?((softcap-currentFund)/hardcap)*100: 0}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>softcap: {`${currency}${softcap}`}</span></Progress>
-					<Progress bar max={100} color="info" value={(softcap-currentFund)>0? 100 - (softcap/hardcap)*100 : 100 - (currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>hardcap: {`${currency}${hardcap}`}</span></Progress>
-				</Progress>
+					<Progress active animated max={100} color={progressColor} value={(currentFund/hardcap)*100}><span style={{color:this.props.milestoneLineColor}} className={'progressText'}>{`${parseInt((currentFund/softcap)*100)}% Funded`}</span></Progress>
 				<div className={'flexLines'}>
 					<ShapeMilestone line divType={BOTTOM_LINE_DIV} {...this.props} />
 				</div>
@@ -251,7 +247,7 @@ render() {
 		const { days, hours, minutes, seconds, daysShuffle, hoursShuffle, minutesShuffle, secondsShuffle, isExpired } = this.state;
     const { softcap, hardcap, Milestones, icoProgress, milestones } = this.props;
 		return(
-      isExpired?
+      isExpired && icoProgress?
 			<FundingProgress {...this.props} />
       :
 			<div className={'flipClock'} >

@@ -3,19 +3,13 @@ import { render } from "react-dom";
 import FundClockProgress from "../lib";
 import "./styles.css";
 const milestonesData= [{
-  text: 'ICO Start',
+  text: 'Campaign Start',
   cap: 0
 },{
-  text: 'Pilot Version',
-  cap: 9000000
+  text: 'Minimum Goal $15M',
+  cap: 15000000
 },{
-  text: 'alpha Version',
-  cap: 14000000
-},{
-  text: 'Beta Version',
-  cap: 17000000
-},{
-  text: 'Complete Version',
+  text: 'Maximum Goal $24M',
   cap: 24000000
 },]
 class Demo extends React.Component {
@@ -23,7 +17,7 @@ class Demo extends React.Component {
     super(props)
     this.state={
       currentFund:100000,
-      softcap: 9000000,
+      softcap: 15000000,
       hardcap: 24000000,
     }
   }
@@ -48,20 +42,24 @@ class Demo extends React.Component {
   render(){
     return (
       <div>
-        <h1>ICO Countdown Component</h1>
+        <h1>With Milestones & Progress bar for Crowdsale</h1>
         <FundClockProgress
           icoProgress
           currentFund={this.state.currentFund}
           softcap={this.state.softcap}
           hardcap={this.state.hardcap}
           milestones={milestonesData}
-          milestoneLineColor={'#000'}
+          milestoneLineColor={'#a44fd2'}
+          progressColor={'warning'} //bootstrap default colors: 'warning', 'info', 'success', ..etc
           icoClockStyle={{backgroundColor:'#ddd'}}
           icoClockFlipStyle={{backgroundColor:'#ddd'}}
           icoClockFlipTextStyle={{color:'#e91e63'}}
-          // unitLabelContainerStyle={{backgroundColor:'#e91e63', height: '25px'}}
+          unitLabelContainerStyle={{backgroundColor:'#e91e63'}}
           // unitLabelTextStyle={{color:'#000', fontSize: '1.1em'}}
         />
+
+        <h1>Just Countdown without progress bar or Milstones</h1>
+        <FundClockProgress />
       </div>
     );
   }
