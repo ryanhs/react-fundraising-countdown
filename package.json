@@ -1,8 +1,7 @@
 {
   "name": "react-fundraising-countdown",
-  "version": "0.0.16",
-  "description":
-    "ICO Fundraising component includes: countdown, progressbar, and milestones",
+  "version": "0.0.17",
+  "description": "ICO Fundraising component includes: countdown, progressbar, and milestones",
   "main": "lib/index.js",
   "scripts": {
     "lib": "babel src/lib -d lib",
@@ -10,7 +9,13 @@
     "docs": "webpack-dev-server",
     "docs:prod": "webpack -p"
   },
-  "keywords": ["ICO", "countdown", "fundraising", "react", "progressbar"],
+  "keywords": [
+    "ICO",
+    "countdown",
+    "fundraising",
+    "react",
+    "progressbar"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "react": "^15.3.0 || ^16.2.0",
@@ -24,7 +29,7 @@
     "babel-loader": "^8.0.0-beta.0",
     "css-loader": "^0.28.8",
     "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.8.3",
+    "node-sass": "^4.9.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "sass-loader": "^7.0.1",
