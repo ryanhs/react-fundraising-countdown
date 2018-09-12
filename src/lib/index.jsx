@@ -253,28 +253,28 @@ render() {
 			<div className={'flipClock'} >
         <FlipUnitContainer
           unit={'days'}
-          alias={'Days'}
+          alias={'Hari'}
           digit={days}
           shuffle={daysShuffle}
 					{...this.props}
           />
         <FlipUnitContainer
 					unit={'hours'}
-          alias={'Hours'}
+          alias={'Jam'}
 					digit={hours}
 					shuffle={hoursShuffle}
 					{...this.props}
 					/>
 				<FlipUnitContainer
 					unit={'minutes'}
-          alias={'Mins'}
+          alias={'Menit'}
 					digit={minutes}
 					shuffle={minutesShuffle}
 					{...this.props}
 					/>
 				<FlipUnitContainer
 					unit={'seconds'}
-          alias={'Secs'}
+          alias={'Detik'}
 					digit={seconds}
 					shuffle={secondsShuffle}
 					{...this.props}
